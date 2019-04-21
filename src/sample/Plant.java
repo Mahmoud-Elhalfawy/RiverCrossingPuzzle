@@ -31,5 +31,12 @@ public class Plant extends Crosser implements ICrosser {
         return null;
     }
 
+    public void getOn(){
+
+    }
+    public void getOff(){
+
+    }
+
 
 }

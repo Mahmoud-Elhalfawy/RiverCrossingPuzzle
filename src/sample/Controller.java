@@ -6,6 +6,6 @@ import java.awt.*;
 public class Controller {
     Button hi;
     public void trial() {
-        System.out.println("dodo");
+        System.out.println("try");
     }
 }

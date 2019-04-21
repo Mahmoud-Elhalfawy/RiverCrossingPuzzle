@@ -32,4 +32,10 @@ setEatingRank(super.getEatingRank());
     public String getLabelToBeShown() {
         return null;
     }
+    public void getOn(){
+
+    }
+    public void getOff(){
+
+    }
 }
