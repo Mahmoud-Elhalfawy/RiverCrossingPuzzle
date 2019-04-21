@@ -27,4 +27,10 @@ public class Tiger extends Carnivorous implements ICrosser {
     public String getLabelToBeShown() {
         return null;
     }
+    public void getOn(){
+
+    }
+    public void getOff(){
+
+    }
 }

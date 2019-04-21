@@ -38,4 +38,10 @@ public class Farmer extends Crosser implements ICrosser {
     }
 
 
+    public void getOn(){
+
+    }
+    public void getOff(){
+
+    }
 }

@@ -31,4 +31,10 @@ public class Goat extends Herbivorous implements ICrosser {
     public String getLabelToBeShown() {
         return null;
     }
+    public void getOn(){
+
+    }
+    public void getOff(){
+
+    }
 }
