@@ -1,34 +1,21 @@
 package sample;
 
-import javafx.animation.Animation;
-import javafx.animation.ParallelTransition;
-import javafx.animation.PathTransition;
-import javafx.application.Platform;
+import javafx.animation.*;
 import javafx.event.EventHandler;
 import javafx.scene.Group;
 import javafx.scene.Scene;
 import javafx.scene.canvas.Canvas;
 import javafx.scene.canvas.GraphicsContext;
-import javafx.scene.effect.Glow;
 import javafx.scene.image.Image;
 import javafx.scene.image.ImageView;
-import javafx.scene.input.*;
-import javafx.scene.paint.Color;
-import javafx.scene.shape.CubicCurveTo;
-import javafx.scene.shape.LineTo;
-import javafx.scene.shape.MoveTo;
-import javafx.scene.shape.Path;
-import javafx.scene.text.Font;
-import javafx.scene.text.Text;
+import javafx.scene.input.MouseEvent;
+import javafx.scene.shape.*;
 import javafx.stage.Stage;
 import javafx.util.Duration;
+import javafx.scene.shape.Polyline;
 
 import java.awt.*;
-import java.io.File;
-import java.io.FileInputStream;
-import java.io.FileNotFoundException;
-import java.util.logging.Level;
-import java.util.logging.Logger;
+import java.sql.Time;
 
 public class LevelOne {
 
@@ -39,6 +26,7 @@ public class LevelOne {
     ImageView farmerview;
     ImageView BoatView;
     Group root;
+
     public LevelOne(Stage stage) {
         this.stage = stage;
     }
@@ -80,52 +68,70 @@ public class LevelOne {
 
         root = new Group();
         levelOneScene = new Scene(root, 1400, 800);
-       Canvas canvas= new Canvas(1400,800);
+        Canvas canvas = new Canvas(1400, 800);
         root.getChildren().add(riverBanks);
         GraphicsContext gc = canvas.getGraphicsContext2D();
 
-     Farmer = new FarmerImage(new Image("file:paintleftfarmer_burned.png"),new Image("file:paintrighttfarmer_burned.png"));
-        farmerview=new ImageView(Farmer.LeftImage);
+        Farmer = new FarmerImage(new Image("file:paintleftfarmer_burned.png"), new Image("file:paintrighttfarmer_burned.png"));
+        farmerview = new ImageView(Farmer.LeftImage);
         farmerview.setLayoutX(Farmer.getLeftPositionX());
         farmerview.setLayoutY(Farmer.getLeftPositionY());
-       // Farmer.render(gc);
+        // Farmer.render(gc);
         Farmer.render2(gc);
-        SheepImage Sheep = new SheepImage(new Image("file:leftpaintsheep_burned.png"),new Image("file:rightpaintsheep_burned.png"));
+        SheepImage Sheep = new SheepImage(new Image("file:leftpaintsheep_burned.png"), new Image("file:rightpaintsheep_burned.png"));
         Sheep.render(gc);
         Sheep.render2(gc);
-        WolfImage Wolf = new WolfImage(new Image("file:leftwolfpaint_burned.png") , new Image("file:rightwolfpaint_burned.png"));
+        WolfImage Wolf = new WolfImage(new Image("file:leftwolfpaint_burned.png"), new Image("file:rightwolfpaint_burned.png"));
         Wolf.render(gc);
         Wolf.render2(gc);
-        CabbageImage Cabbage = new CabbageImage(new Image("file:leftcabbage1.png"),new Image("file:leftcabbage1.png"));
+        CabbageImage Cabbage = new CabbageImage(new Image("file:leftcabbage1.png"), new Image("file:leftcabbage1.png"));
         Cabbage.render(gc);
         Cabbage.render2(gc);
- Boat = new BoatImage(new Image("file:raft.png"),new Image("file:raft.png"));
+        Boat = new BoatImage(new Image("file:raft.png"), new Image("file:raft.png"));
         BoatView = new ImageView(Boat.LeftImage);
         BoatView.setLayoutX(Boat.getLeftPositionX());
         BoatView.setLayoutY(Boat.getLeftPositionY());
 
         Boat.render(gc);
-        Boat.render2(gc);
+        //Boat.render2(gc);
 
         stage.setScene(levelOneScene);
-stage.show();
+        stage.show();
         root.getChildren().add(canvas);
         root.getChildren().add(farmerview);
-     //  root.getChildren().add(riverBanks);
-     //   root.getChildren().add(farmerImg);
-      //  root.getChildren().add(sheepImg);
+        //root.getChildren().add(BoatView);
+        //  root.getChildren().add(riverBanks);
+        //   root.getChildren().add(farmerImg);
+        //  root.getChildren().add(sheepImg);
         //root.getChildren().add(wolfImg);
-    //    root.getChildren().add(cabbageImg);
-
-
+        //    root.getChildren().add(cabbageImg);
 
     }
 
-public  void Move()
+    public void Move() {
 
-    {
+        farmerview.setOnMouseClicked(new EventHandler<MouseEvent>() {
 
-        Path path = new Path();
+            @Override
+            public void handle(MouseEvent event1) {
+                Line line = new Line();
+                line.setStartX(50);
+                line.setStartY(100);
+                line.setEndX(330);
+                line.setEndY(110);
+                PathTransition transition = new PathTransition();
+                transition.setNode(farmerview);
+                transition.setDuration(Duration.seconds(6));
+                transition.setPath(line);
+                Timeline timeline = new Timeline(new KeyFrame(Duration.seconds(0), event -> transition.play()), new KeyFrame(Duration.seconds(5), event -> transition.pause()));
+                transition.setCycleCount(1);
+                timeline.play();
+
+            }
+        });
+
+
+        /*Path path = new Path();
         MoveTo moveTo = new MoveTo();
         moveTo.setX(Farmer.getLeftPositionX());
         moveTo.setY(Farmer.getLeftPositionY());
@@ -146,7 +152,7 @@ public  void Move()
         pathTransition.setAutoReverse(true);
         ParallelTransition parallelTransition = new ParallelTransition(new Animation[]{pathTransition});
         parallelTransition.play();
-        root.getChildren().add(path);
+        root.getChildren().add(path);*/
 
     }
 
@@ -232,6 +238,7 @@ public  void Move()
             }
         }); */
 
-    }
+
+}
 
 
