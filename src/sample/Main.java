@@ -50,6 +50,7 @@ public class Main extends Application {
 
         LevelOne levelOneScene = new LevelOne(stage);
         levelOneScene.prepareScene();
+       // levelOneScene.mouseDragDropped();
 
         levelsMenuScene.setLevelOneScene(levelOneScene);
 
